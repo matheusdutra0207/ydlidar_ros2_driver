@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
   //////////////////////float property/////////////////
   /// unit: °
   float scan_gain = 1.0f;
-  node->declare_parameter("scan_gain");
+  node->declare_parameter("scan_gain", scan_gain);
   node->get_parameter("scan_gain", scan_gain);
 
   float f_optvalue = 180.0f;
