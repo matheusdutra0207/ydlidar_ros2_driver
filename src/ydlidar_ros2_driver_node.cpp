@@ -127,6 +127,10 @@ int main(int argc, char *argv[]) {
 
   //////////////////////float property/////////////////
   /// unit: °
+  float scan_gain = 1.0f;
+  node->declare_parameter("scan_gain");
+  node->get_parameter("scan_gain", scan_gain);
+
   float f_optvalue = 180.0f;
   node->declare_parameter("angle_max", f_optvalue);
   node->get_parameter("angle_max", f_optvalue);
@@ -222,7 +226,7 @@ int main(int argc, char *argv[]) {
         int index = std::ceil((scan.points[i].angle - scan.config.min_angle)/scan.config.angle_increment);
         if(index >=0 && index < size) {
 	  if (scan.points[i].range >= scan.config.min_range) {
-            scan_msg->ranges[index] = scan.points[i].range;
+            scan_msg->ranges[index] = scan_gain*scan.points[i].range;
             scan_msg->intensities[index] = scan.points[i].intensity;
 	  }
         }
